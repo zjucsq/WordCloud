@@ -1,4 +1,5 @@
 from flask import Flask, Response
+from gevent import pywsgi
 import fun
 import os
 
@@ -55,4 +56,6 @@ def team(nid):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    # app.run(host='0.0.0.0')
+    server = pywsgi.WSGIServer(('0.0.0.0', 5000), app)
+    server.serve_forever()
