@@ -60,9 +60,10 @@ def draw_word_cloud(keywords, nid, type):
 
     sys_str = platform.system()
     if sys_str == "Linux":
-        font_path = r'/usr/share/fonts/truetype/zh/SimSun.TTC'
+        font_path = r'~/python/WordCloud/SIMSUN.TTC'
     elif sys_str == "Windows":
         font_path = r'C:\Windows\Fonts\SimSun.TTC'
+    print(font_path)
     wc = WordCloud(background_color="white", max_words=1000, mask=background,
                    max_font_size=500, random_state=444, font_path=font_path)
 
