@@ -1,5 +1,6 @@
 from flask import Flask, Response
 import fun
+import os
 
 app = Flask(__name__)
 
@@ -11,12 +12,13 @@ def hello_world():
 
 @app.route('/player/<int:nid>')
 def player(nid):
-    name = fun.find_player_name(nid)
-    news_list = fun.calculate_news(name)
-    keywords = fun.calculate_keywords(news_list)
-    fun.draw_word_cloud(keywords, nid, 0)
-    img_path = 'image/player' + str(nid) + '.png'
-    with open(img_path, 'rb') as f:
+    image_path = 'image/player' + str(nid) + '.png'
+    if not os.path.exists(image_path):
+        name = fun.find_player_name(nid)
+        news_list = fun.calculate_news(name)
+        keywords = fun.calculate_keywords(news_list)
+        fun.draw_word_cloud(keywords, nid, 0)
+    with open(image_path, 'rb') as f:
         image = f.read()
     resp = Response(image, mimetype="image/png")
     return resp
@@ -24,12 +26,13 @@ def player(nid):
 
 @app.route('/team/<int:nid>')
 def team(nid):
-    name = fun.find_team_name(nid)
-    news_list = fun.calculate_news(name)
-    keywords = fun.calculate_keywords(news_list)
-    fun.draw_word_cloud(keywords, nid, 1)
-    img_path = 'image/team' + str(nid) + '.png'
-    with open(img_path, 'rb') as f:
+    image_path = 'image/team' + str(nid) + '.png'
+    if not os.path.exists(image_path):
+        name = fun.find_team_name(nid)
+        news_list = fun.calculate_news(name)
+        keywords = fun.calculate_keywords(news_list)
+        fun.draw_word_cloud(keywords, nid, 1)
+    with open(image_path, 'rb') as f:
         image = f.read()
     resp = Response(image, mimetype="image/png")
     return resp

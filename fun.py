@@ -10,7 +10,7 @@ import platform
 
 
 def find_team_name(id):
-    with open('playerId.json', 'r', encoding='utf-8') as f:
+    with open('teamId.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     return data[str(id)]
 
