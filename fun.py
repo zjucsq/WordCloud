@@ -41,10 +41,12 @@ def calculate_news(name):
 
 
 def calculate_keywords(news_list):
+    # 停止词
+    jieba.analyse.set_stop_words(stop_words_path='stopword.txt')
     text = ""
     for s in news_list:
         text += s
-    keywords = extract_tags(text, topK=100, withWeight=True, allowPOS=())
+    keywords = extract_tags(text, topK=80, withWeight=True, allowPOS=())
     # for word, weight in keywords:
     #     print(word, weight)
     # print(keywords)
