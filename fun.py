@@ -6,6 +6,7 @@ import jieba
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from matplotlib import pyplot as plt
 import numpy as np
+import platform
 
 
 def find_team_name(id):
@@ -57,8 +58,13 @@ def draw_word_cloud(keywords, nid, type):
     elif type == 1:
         background = np.array(Image.open("斯托克城.png"))'''
 
+    sys_str = platform.system()
+    if sys_str == "Linux":
+        font_path = r'/usr/share/fonts/truetype/zh/SimSun.TTC'
+    elif sys_str == "Windows":
+        font_path = r'C:\Windows\Fonts\SimSun.TTC'
     wc = WordCloud(background_color="white", max_words=1000, mask=background,
-                   max_font_size=500, random_state=444, font_path='C:\Windows\Fonts\SimSun.TTC')
+                   max_font_size=500, random_state=444, font_path=font_path)
 
     # 生成词云, keywords是上一步中jieba提取的关键词
     wc.generate_from_frequencies(dict(keywords))
