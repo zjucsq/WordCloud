@@ -47,10 +47,14 @@ def calculate_keywords(news_list):
     keywords = extract_tags(text, topK=100, withWeight=True, allowPOS=())
     # for word, weight in keywords:
     #     print(word, weight)
+    print(keywords)
     return keywords
 
 
 def draw_word_cloud(keywords, nid, type):
+    if not keywords:
+        return False
+
     # 设置背景图片
     background = np.array(Image.open("温格.jpg"))
     '''if type == 0:
@@ -60,11 +64,11 @@ def draw_word_cloud(keywords, nid, type):
 
     sys_str = platform.system()
     if sys_str == "Linux":
-        font_path = r'~/python/WordCloud/SIMSUN.TTC'
+        font_path = r'SIMSUN.TTC'
     elif sys_str == "Windows":
         font_path = r'C:\Windows\Fonts\SimSun.TTC'
-    print(font_path)
-    wc = WordCloud(background_color="white", max_words=1000, mask=background,
+    # print(font_path)
+    wc = WordCloud(background_color='White', max_words=1000, mask=background,
                    max_font_size=500, random_state=444, font_path=font_path)
 
     # 生成词云, keywords是上一步中jieba提取的关键词
@@ -74,7 +78,7 @@ def draw_word_cloud(keywords, nid, type):
     image_colors = ImageColorGenerator(background)
 
     # 以下代码显示图片
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(7, 8))
     plt.imshow(wc, interpolation="bilinear")
     plt.axis("off")
 
@@ -83,7 +87,11 @@ def draw_word_cloud(keywords, nid, type):
     plt.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
     # 0球员 1图片
     if type == 0:
-        plt.savefig('image/player' + str(nid) + '.png')
+        # plt.savefig('image/player' + str(nid) + '.png')
+        wc.to_file('image/player' + str(nid) + '.png')
     elif type == 1:
-        plt.savefig('image/team' + str(nid) + '.png')
+        # plt.savefig('image/team' + str(nid) + '.png')
+        wc.to_file('image/team' + str(nid) + '.png')
     plt.axis("off")
+
+    return True
