@@ -47,7 +47,7 @@ def calculate_keywords(news_list):
     keywords = extract_tags(text, topK=100, withWeight=True, allowPOS=())
     # for word, weight in keywords:
     #     print(word, weight)
-    print(keywords)
+    # print(keywords)
     return keywords
 
 
