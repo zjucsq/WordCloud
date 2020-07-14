@@ -58,11 +58,11 @@ def draw_word_cloud(keywords, nid, type):
         return False
 
     # 设置背景图片
-    background = np.array(Image.open("温格.jpg"))
-    '''if type == 0:
+    # background = np.array(Image.open("温格.jpg"))
+    if type == 0:
         background = np.array(Image.open("温格.jpg"))
     elif type == 1:
-        background = np.array(Image.open("斯托克城.png"))'''
+        background = np.array(Image.open("巴塞罗那.png"))
 
     sys_str = platform.system()
     if sys_str == "Linux":
